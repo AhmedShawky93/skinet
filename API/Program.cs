@@ -17,6 +17,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 
 builder.Services.AddScoped<IproductRepository, ProductRepository>(); //impelement repo
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));//impelement
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -28,6 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
