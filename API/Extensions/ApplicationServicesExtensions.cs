@@ -17,7 +17,7 @@ namespace API.Extensions
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            
+
             // Add Db context from my dbContext class by Ahmed Shawky
             services.AddDbContext<StoreContext>(opt =>
             {
@@ -43,6 +43,14 @@ namespace API.Extensions
                     };
                     return new BadRequestObjectResult(errorResponse);
                 };
+            });
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
             });
             return services;
         }
